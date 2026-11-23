@@ -1,6 +1,8 @@
 # O Lado de Lá Turismo — regras permanentes
 
 Plataforma de **turismo virtual, conhecimento, inclusão e acessibilidade**. Não é agência de viagens: não vende passeios nem pacotes.
+Pontos turísticos de **Alto Piquiri (PR)**. Referência completa: `docs/PROJETO.md` (leia antes de tarefas de produto, design ou conteúdo).
+Essenciais: **descrição textual ≠ audiodescrição** (narração gravada). São recursos independentes por foto; nunca juntar nem trocar por TTS. **Atração turística ≠ estabelecimento comercial** (cards e áreas distintos). Galerias e fotos originais são patrimônio.
 Prioridade: 1 Segurança · 2 Acessibilidade · 3 Qualidade do código · 4 Design · 5 Desempenho · 6 SEO · 7 Economia de tokens.
 
 ## Proteção do projeto (nunca, sem autorização explícita)
