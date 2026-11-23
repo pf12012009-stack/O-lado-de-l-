@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/atkinson-hyperlegible-next';
+
+/* Tokens de cor: verde dos rios, terra roxa do noroeste do Paraná, sol de fim de tarde. */
+:root {
+  --papel: #f2f7f5;
+  --superficie: #ffffff;
+  --superficie-2: #e4efeb;
+  --tinta: #13221f;
+  --tinta-suave: #4a5d59;
+  --rio: #0d4f47;
+  --rio-forte: #08362f;
+  --rio-claro: #d3e9e3;
+  --terra: #8a3420;
+  --terra-clara: #f6e1d9;
+  --sol: #e7a33e;
+  --linha: #b9ccc6;
+  --foco: #0b57d0;
+  --sombra: 0 1px 2px rgb(8 54 47 / 0.08), 0 8px 24px -12px rgb(8 54 47 / 0.25);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --papel: #0c1715;
+    --superficie: #13211e;
+    --superficie-2: #1a2c28;
+    --tinta: #e8f1ee;
+    --tinta-suave: #a9bcb7;
+    --rio: #74d3c1;
+    --rio-forte: #a6e6da;
+    --rio-claro: #17352f;
+    --terra: #f3a487;
+    --terra-clara: #3a1f17;
+    --sol: #f0b65a;
+    --linha: #34504a;
+    --foco: #8ab4ff;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* Alto contraste escolhido pelo visitante */
+:root[data-contraste='alto'] {
+  --papel: #ffffff;
+  --superficie: #ffffff;
+  --superficie-2: #ffffff;
+  --tinta: #000000;
+  --tinta-suave: #000000;
+  --rio: #003a33;
+  --rio-forte: #001f1b;
+  --rio-claro: #ffffff;
+  --terra: #5c1608;
+  --terra-clara: #ffffff;
+  --linha: #000000;
+  --foco: #0033cc;
+  --sombra: none;
+  color-scheme: light;
+}
+
+/* Tamanho do texto escolhido pelo visitante */
+:root[data-texto='maior'] { font-size: 112.5%; }
+:root[data-texto='muito-maior'] { font-size: 131.25%; }
+
+@theme {
+  --font-display: 'Bricolage Grotesque Variable', 'Trebuchet MS', sans-serif;
+  --font-sans: 'Atkinson Hyperlegible Next Variable', 'Verdana', sans-serif;
+  --color-papel: var(--papel);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-rio: var(--rio);
+  --color-rio-forte: var(--rio-forte);
+  --color-rio-claro: var(--rio-claro);
+  --color-terra: var(--terra);
+  --color-terra-clara: var(--terra-clara);
+  --color-sol: var(--sol);
+  --color-linha: var(--linha);
+}
+
+@layer base {
+  html {
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--papel);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  a { color: var(--rio); text-decoration: underline; text-underline-offset: 0.18em; }
+  :focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  [tabindex='-1']:focus { outline: none; }
+  img { max-width: 100%; height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes aparecer { from { opacity: 0.25; } to { opacity: 1; } }
+
+@layer components {
+  /* Rodapé sempre escuro, com contraste fixo em todos os temas */
+  .rodape { background: #08362f; color: #e8f1ee; }
+  .rodape a { color: #e8f1ee; }
+  :root[data-contraste='alto'] .rodape { background: #000; color: #fff; }
+  :root[data-contraste='alto'] .rodape a { color: #fff; }
+  .conteudo { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+  .texto-corrido { max-width: 68ch; }
+  .botao {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px; padding: 0.6rem 1.15rem; border-radius: 999px;
+    font-weight: 700; text-decoration: none; cursor: pointer;
+    border: 2px solid transparent; transition: background-color 150ms, color 150ms, border-color 150ms;
+  }
+  .botao-primario { background: var(--rio); color: var(--papel); }
+  .botao-primario:hover { background: var(--rio-forte); }
+  .botao-contorno { border-color: var(--rio); color: var(--rio); background: transparent; }
+  .botao-contorno:hover { background: var(--rio-claro); }
+  .sr-only-focavel:not(:focus) {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  /* Espaço reservado: deixa claro que a fotografia original ainda não foi enviada */
+  .reservado {
+    background-color: var(--superficie-2);
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--linha) 55%, transparent) 14px 15px);
+  }
+}

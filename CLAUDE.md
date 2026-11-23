@@ -22,6 +22,11 @@ Prioridade: 1 Segurança · 2 Acessibilidade · 3 Qualidade do código · 4 Desi
 6. Depois de mudança estrutural (arquivos/componentes/rotas novos ou movidos): `graphify update .`
 7. Respostas e relatórios curtos e objetivos; sem análises repetidas.
 
+## Site (código)
+- Stack: React 19, TypeScript, Vite, Tailwind 4, Wouter, pré-renderização (`scripts/prerender.mjs`). Sem backend por enquanto.
+- Conteúdo: `src/data/` (atracoes, comercio, site, fontes). Todo fato tem fonte. Integração de mídia: `docs/MIDIA.md`.
+- Comandos: `npm run dev` · `npm test` · `npm run typecheck` · `npm run build` · `npm run check:midia` · `npx vite preview --port 4173`.
+
 ## Skills (`.claude/skills/`, sob demanda)
 | Área | Skills |
 |---|---|
