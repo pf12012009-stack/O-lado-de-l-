@@ -22,7 +22,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) {
+  :root:not([data-tema='claro']):not([data-theme='light']):not([data-contraste='alto']) {
     --papel: #0c1715;
     --superficie: #13211e;
     --superficie-2: #1a2c28;
@@ -39,6 +39,25 @@
     --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
+}
+
+/* Tema escuro escolhido explicitamente (ex.: visualizador do claude.ai) */
+:root[data-theme='dark']:not([data-contraste='alto']) {
+  --papel: #0c1715;
+  --superficie: #13211e;
+  --superficie-2: #1a2c28;
+  --tinta: #e8f1ee;
+  --tinta-suave: #a9bcb7;
+  --rio: #74d3c1;
+  --rio-forte: #a6e6da;
+  --rio-claro: #17352f;
+  --terra: #f3a487;
+  --terra-clara: #3a1f17;
+  --sol: #f0b65a;
+  --linha: #34504a;
+  --foco: #8ab4ff;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
 }
 
 /* Alto contraste escolhido pelo visitante */

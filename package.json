@@ -10,7 +10,8 @@
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check:midia": "node scripts/verificar-midia.mjs"
+    "check:midia": "node scripts/verificar-midia.mjs",
+    "previa": "node scripts/previa.mjs"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",

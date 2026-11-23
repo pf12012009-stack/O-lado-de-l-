@@ -42,9 +42,13 @@ export function Galeria({ fotografias, nomeLugar }: Props) {
     const i = (novo + total) % total;
     setIndice(i);
     setAnuncio(`Mostrando ${rotulo(i)}: ${fotografias[i].titulo}`);
-    const url = new URL(window.location.href);
-    url.searchParams.set('foto', fotografias[i].id);
-    window.history.replaceState(window.history.state, '', url);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('foto', fotografias[i].id);
+      window.history.replaceState(window.history.state, '', url);
+    } catch {
+      /* endereço não pode ser alterado neste ambiente: a galeria segue funcionando */
+    }
     if (focarMiniatura) miniaturas.current[i]?.focus();
   };
 

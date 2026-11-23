@@ -1,4 +1,5 @@
 import { Route, Router, Switch } from 'wouter';
+import { memoryLocation } from 'wouter/memory-location';
 import { Layout } from './components/Layout';
 import { AtracaoPagina } from './pages/AtracaoPagina';
 import { Atracoes, CategoriaPagina } from './pages/Atracoes';
@@ -6,9 +7,13 @@ import { Inicio } from './pages/Inicio';
 import { Acessibilidade, Comercio, Contato, Sobre } from './pages/Institucionais';
 import { NaoEncontrada } from './pages/NaoEncontrada';
 
+/** Modo prévia (arquivo único): navegação em memória, sem depender do endereço da página. */
+const PREVIA = import.meta.env.VITE_PREVIA === '1';
+const memoria = PREVIA ? memoryLocation({ path: '/' }) : undefined;
+
 export function App({ caminho }: { caminho?: string }) {
   return (
-    <Router ssrPath={caminho}>
+    <Router ssrPath={caminho} hook={caminho === undefined ? memoria?.hook : undefined}>
       <Layout>
         <Switch>
           <Route path="/"><Inicio /></Route>
