@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+# Graphify: mapa regenerável (graphify update .)
+graphify-out/
+.claude/settings.local.json
+*.graphify-bak

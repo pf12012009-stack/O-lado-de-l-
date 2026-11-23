@@ -1,0 +1,68 @@
+{
+  "enabledPlugins": {
+    "claude-security@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "graphify hook-guard search",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "graphify hook-guard read",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "graphify hook-guard compact",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "GRAPHIFY_BACKEND": "none",
+    "GRAPHIFY_QUERY_LOG_DISABLE": "1",
+    "ENABLE_STOP_REVIEW": "0",
+    "MAX_COMMIT_REVIEWS_PER_HOUR": "5"
+  },
+  "permissions": {
+    "deny": [
+      "Bash(vercel deploy:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(npm publish:*)",
+      "Bash(supabase db push:*)",
+      "Bash(supabase db reset:*)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}

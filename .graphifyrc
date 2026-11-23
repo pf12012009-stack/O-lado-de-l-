@@ -1,0 +1,3 @@
+# Consultas curtas por padrão (economia de tokens)
+query_budget=1500
+query_depth=2

@@ -1,0 +1,35 @@
+# Caches, builds e arquivos gerados — fora do mapa
+node_modules/
+dist/
+build/
+.next/
+.vite/
+.cache/
+coverage/
+out/
+playwright-report/
+test-results/
+graphify-out/
+CLAUDE-SECURITY-*/
+tools/auditoria/node_modules/
+.claude/
+*.min.js
+*.map
+*.lock
+package-lock.json
+# Mídia (sem análise semântica/LLM)
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.avif
+*.gif
+*.svg
+*.ico
+*.mp3
+*.wav
+*.ogg
+*.m4a
+*.mp4
+*.webm
+*.pdf
