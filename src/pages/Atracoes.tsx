@@ -3,6 +3,8 @@ import { Link } from 'wouter';
 import { CardAtracao } from '../components/Cards';
 import { LinkFonte, ListaDeContatos } from '../components/Fontes';
 import { Pagina } from '../components/Layout';
+import { TopoFoto } from '../components/TopoFoto';
+import { fotoDe } from '../lib/imagens';
 import { CATEGORIAS, atracaoPorSlug, atracoesDaCategoria, categoriaPorId } from '../data/atracoes';
 import { FONTES } from '../data/fontes';
 import type { Atracao, CategoriaId } from '../data/tipos';
@@ -29,24 +31,34 @@ function Filtros({ atual }: { atual?: CategoriaId }) {
 
 function Grade({ lista, nivel = 3 }: { lista: Atracao[]; nivel?: 2 | 3 }) {
   return (
-    <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {lista.map((a) => <li key={a.slug} className="flex"><CardAtracao atracao={a} nivelTitulo={nivel} /></li>)}
+    <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {lista.length === 1 ? (
+        <li className="revelar flex sm:col-span-2 lg:col-span-3"><CardAtracao atracao={lista[0]} nivelTitulo={nivel} destaque /></li>
+      ) : (
+        lista.map((a) => <li key={a.slug} className="revelar flex"><CardAtracao atracao={a} nivelTitulo={nivel} /></li>)
+      )}
     </ul>
   );
 }
 
+const IMAGEM_TOPO: Record<CategoriaId | 'todos', [slug: string, id: string, posicao?: string]> = {
+  todos: ['rio-piquiri', 'rio-piquiri'],
+  religioso: ['capela-nossa-senhora-aparecida', 'vista-geral-interna', 'center 45%'],
+  aventura: ['pedal-das-aguas', 'abertura', 'center 30%'],
+  natureza: ['rio-piquiri', 'rio-piquiri'],
+};
+
 function Topo({ titulo, intro, atual, children }: { titulo: string; intro: string; atual?: CategoriaId; children?: ReactNode }) {
+  const [slug, id, pos] = IMAGEM_TOPO[atual ?? 'todos'];
   return (
-    <div className="faixa-marca pb-10 pt-12">
-      <div className="conteudo">
-        <h1 className="text-4xl font-semibold sm:text-6xl">{titulo}</h1>
-        <p className="mt-4 max-w-3xl text-lg opacity-95">{intro}</p>
-        {children}
-      </div>
-      <div className="conteudo [&_.botao-contorno]:border-[#f4eee3] [&_.botao-contorno]:text-[#f4eee3] [&_.botao-primario]:bg-[#e2c27e] [&_.botao-primario]:text-[#0e2a21]">
+    <TopoFoto foto={fotoDe(slug, id)} posicao={pos}>
+      <h1 className="text-5xl font-semibold sm:text-7xl">{titulo}</h1>
+      <p className="mt-4 max-w-2xl text-lg text-[#fbf4e8]/95">{intro}</p>
+      {children}
+      <div className="[&_.botao-contorno]:border-[#fbf4e8]/70 [&_.botao-contorno]:bg-black/20 [&_.botao-contorno]:text-[#fbf4e8] [&_.botao-contorno]:backdrop-blur-md [&_.botao-primario]:bg-[#f4b43a] [&_.botao-primario]:text-[#0b3d2e]">
         <Filtros atual={atual} />
       </div>
-    </div>
+    </TopoFoto>
   );
 }
 
@@ -57,8 +69,8 @@ export function Atracoes() {
       <div className="conteudo">
         {CATEGORIAS.map((c) => (
           <section key={c.id} aria-labelledby={`sec-${c.id}`} className="mt-14">
-            <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-sol pb-3">
-              <h2 id={`sec-${c.id}`} className="text-3xl font-semibold">{c.nome}</h2>
+            <div className="revelar flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-sol pb-3">
+              <h2 id={`sec-${c.id}`} className="text-4xl font-semibold">{c.nome}</h2>
               <Link href={c.caminho} className="font-bold">Sobre {c.nome.toLowerCase()}</Link>
             </div>
             <Grade lista={atracoesDaCategoria(c.id)} />
@@ -124,7 +136,7 @@ function FichaRota() {
         {dados.map((d) => (
           <div key={d.rotulo} className="border-l-4 border-sol pl-3">
             <dt className="text-sm text-tinta-suave">{d.rotulo}</dt>
-            <dd className="font-display text-2xl font-semibold tabular-nums">{d.valor}</dd>
+            <dd className="font-display text-3xl font-semibold tabular-nums text-terra sm:text-4xl">{d.valor}</dd>
           </div>
         ))}
       </dl>

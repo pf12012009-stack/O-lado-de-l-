@@ -1,5 +1,9 @@
 # Integração de fotografias, descrições textuais e audiodescrições
 
+> **Situação (2026-11-24):** o material original do site antigo foi importado: 21 fotografias, as descrições textuais e 17 audiodescrições. Os dados ficam em `src/data/midia-original.ts` e os arquivos em `public/midia/atracoes/`. Não foi importado o áudio `santuario-fachada-exemplo.wav`, que parece ser de exemplo. Sem audiodescrição: fachada e São José com o Menino Jesus (Santuário), Rio Piquiri e a abertura da ciclorrota. Quando o pacote novo chegar, substitua os arquivos com o mesmo nome e rode `npm run check:midia`.
+>
+> Cada foto precisa de 3 versões WebP: `<id>.webp` (lado maior 1600), `<id>-1024.webp` (quando a original passa de 1100 px) e `<id>-640.webp` (miniatura).
+
 Cada fotografia fica em `src/data/atracoes.ts`, dentro de `fotografias`, e já tem um `id` igual ao nome do arquivo no site antigo (ex.: `sao-miguel-arcanjo`, `fachada`). Esse `id` liga os três materiais da mesma foto.
 
 ## 1. Onde colocar os arquivos

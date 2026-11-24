@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { ATRACOES, CATEGORIAS } from '../src/data/atracoes';
@@ -44,5 +46,24 @@ describe('Integridade do conteúdo', () => {
     };
     varrer('src');
     for (const p of arquivos) expect(readFileSync(p, 'utf8'), p).not.toMatch(/speechSynthesis|SpeechSynthesisUtterance/);
+  });
+});
+
+describe('Mídias originais', () => {
+  const existe = (p: string) => require('node:fs').existsSync(`public${p}`);
+  it('toda foto, miniatura, versão intermediária e áudio referenciados existem em public/', async () => {
+    const { srcsetDe } = await import('../src/lib/imagens');
+    for (const a of ATRACOES) {
+      for (const f of a.fotografias) {
+        if (f.arquivo) {
+          expect(existe(f.arquivo), f.arquivo).toBe(true);
+          for (const parte of srcsetDe(f)?.split(', ') ?? []) expect(existe(parte.split(' ')[0]), parte).toBe(true);
+        }
+        if (f.audiodescricao) expect(existe(f.audiodescricao.arquivo), f.audiodescricao.arquivo).toBe(true);
+      }
+    }
+  });
+  it('não publica o áudio de exemplo do site antigo', () => {
+    for (const a of ATRACOES) for (const f of a.fotografias) expect(f.audiodescricao?.arquivo ?? '').not.toMatch(/exemplo/);
   });
 });

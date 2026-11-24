@@ -24,7 +24,9 @@ Prioridade: 1 Segurança · 2 Acessibilidade · 3 Qualidade do código · 4 Desi
 
 ## Site (código)
 - Stack: React 19, TypeScript, Vite, Tailwind 4, Wouter, pré-renderização (`scripts/prerender.mjs`). Sem backend por enquanto.
-- Conteúdo: `src/data/` (atracoes, comercio, site, fontes). Todo fato tem fonte. Integração de mídia: `docs/MIDIA.md`.
+- Conteúdo: `src/data/` (atracoes, comercio, site, fontes, midia-original). Todo fato tem fonte. Integração de mídia: `docs/MIDIA.md`.
+- Identidade visual ("janela para o lado de lá"): tokens em `src/styles/global.css` (mata, floresta, tijolo, sol, turquesa, creme), arco do Santuário (`.arco`), curvas de nível (`.topografia`). Texto sobre foto precisa de 4,5:1: use o véu dos cards ou `TopoFoto`. Animações só com transform e sempre respeitando `prefers-reduced-motion`.
+- Imagens: `srcsetDe()` em `src/lib/imagens.ts`; em fundos escurecidos no celular, use `sizes` pequenos (240px).
 - Comandos: `npm run dev` · `npm test` · `npm run typecheck` · `npm run build` · `npm run check:midia` · `npx vite preview --port 4173`.
 
 ## Skills (`.claude/skills/`, sob demanda)

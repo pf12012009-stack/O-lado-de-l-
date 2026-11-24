@@ -1,4 +1,5 @@
 import type { Fotografia } from '../data/tipos';
+import { srcsetDe } from '../lib/imagens';
 import { IconeImagem } from './Icones';
 
 interface Props {
@@ -12,25 +13,29 @@ interface Props {
   compacto?: boolean;
   /** 'cobrir' recorta para preencher (cards); 'inteira' mostra a foto completa (galeria) */
   ajuste?: 'cobrir' | 'inteira';
+  /** Usa só a miniatura (miniaturas da galeria) */
+  so_miniatura?: boolean;
 }
 
 /**
- * Mostra a fotografia original ou, se ainda não foi enviada,
+ * Mostra a fotografia original (com versões responsivas) ou, se ainda não foi enviada,
  * um espaço reservado claramente identificado (nunca uma imagem genérica).
  */
-export function Imagem({ foto, className = '', prioridade, decorativa, tamanhos, compacto, ajuste = 'cobrir' }: Props) {
+export function Imagem({ foto, className = '', prioridade, decorativa, tamanhos, compacto, ajuste = 'cobrir', so_miniatura }: Props) {
   if (foto?.arquivo) {
+    const srcSet = so_miniatura ? undefined : srcsetDe(foto);
     return (
       <img
-        src={foto.arquivo}
+        src={so_miniatura && foto.miniatura ? foto.miniatura : foto.arquivo}
+        srcSet={srcSet}
+        sizes={srcSet ? tamanhos : undefined}
         alt={decorativa ? '' : foto.textoAlternativo ?? foto.titulo}
         width={foto.largura}
         height={foto.altura}
         loading={prioridade ? 'eager' : 'lazy'}
         fetchPriority={prioridade ? 'high' : 'auto'}
         decoding="async"
-        sizes={tamanhos}
-        className={`${ajuste === 'inteira' ? 'object-contain bg-superficie-2' : 'object-cover'} ${className}`}
+        className={`${ajuste === 'inteira' ? 'object-contain' : 'object-cover'} ${className}`}
       />
     );
   }
@@ -44,8 +49,8 @@ export function Imagem({ foto, className = '', prioridade, decorativa, tamanhos,
       <IconeImagem width={compacto ? 18 : 32} height={compacto ? 18 : 32} />
       {!compacto && (
         <>
-          <span className="font-bold">Espaço reservado</span>
-          <span className="text-sm">A fotografia original será adicionada pelo projeto</span>
+          <span className="font-bold">Fotografia em breve</span>
+          <span className="text-sm">A imagem original será adicionada pelo projeto</span>
         </>
       )}
     </div>

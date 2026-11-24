@@ -54,11 +54,13 @@ export interface Fotografia {
   titulo: string;
   /** Caminho da imagem em /public. Ausente = espaço reservado. */
   arquivo?: string;
+  /** Versão menor (≈640 px) para cards e miniaturas */
+  miniatura?: string;
   largura?: number;
   altura?: number;
   /** Texto alternativo curto (atributo alt), lido por leitores de tela. */
   textoAlternativo?: string;
-  /** Descrição textual completa, em parágrafos. */
+  /** Descrição textual completa, em parágrafos. Linhas que começam com "## " são subtítulos. */
   descricaoTextual?: string[];
   /** Narração em áudio da fotografia. */
   audiodescricao?: Audiodescricao;

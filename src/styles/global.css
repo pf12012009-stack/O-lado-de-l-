@@ -2,62 +2,76 @@
 @import '@fontsource-variable/fraunces';
 @import '@fontsource-variable/atkinson-hyperlegible-next';
 
-/* Tokens da marca (brasão): verde-mata, ouro e creme.
-   rio = verde da marca · terra = ouro escuro (texto/realce) · sol = ouro decorativo */
+/*
+  Identidade "Janela para o lado de lá"
+  Cores tiradas das fotografias de Alto Piquiri:
+  mata (verde-escuro da marca) · floresta (gramados) · tijolo (capelas em terracota)
+  sol (ouro do brasão e do fim de tarde) · turquesa (águas do Rio Piquiri) · creme (papel).
+  Nomes antigos mantidos por compatibilidade: rio = floresta, rio-forte = mata, terra = tijolo.
+*/
 :root {
-  --papel: #f4eee3;
+  --papel: #fbf4e8;
   --superficie: #fffdf8;
-  --superficie-2: #eae2d2;
-  --tinta: #17261f;
-  --tinta-suave: #4b5850;
-  --rio: #1e4d3a;
-  --rio-forte: #0e2a21;
-  --rio-claro: #dde9e0;
-  --terra: #7a5418;
-  --terra-clara: #f3e7cc;
-  --sol: #c9a04e;
-  --linha: #d3c7ae;
+  --superficie-2: #f2e4cc;
+  --tinta: #1a2420;
+  --tinta-suave: #4b5751;
+  --rio: #136f4f;
+  --rio-forte: #0b3d2e;
+  --rio-claro: #dcefe5;
+  --terra: #a8471f;
+  --terra-clara: #fbe3d3;
+  --sol: #f4b43a;
+  --turquesa: #0b6e69;
+  --turquesa-clara: #d5f0ee;
+  --linha: #e2d3b6;
   --foco: #0b57d0;
-  --sombra: 0 1px 2px rgb(14 42 33 / 0.08), 0 10px 28px -14px rgb(14 42 33 / 0.3);
+  --sombra: 0 1px 2px rgb(11 61 46 / 0.08), 0 12px 32px -16px rgb(11 61 46 / 0.35);
+  --sombra-alta: 0 2px 4px rgb(11 61 46 / 0.08), 0 28px 60px -24px rgb(11 61 46 / 0.55);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema='claro']):not([data-theme='light']):not([data-contraste='alto']) {
-    --papel: #0c1a15;
-    --superficie: #13241d;
-    --superficie-2: #1b2f27;
-    --tinta: #efe8da;
-    --tinta-suave: #b9b2a2;
-    --rio: #8fcbae;
-    --rio-forte: #c4e5d3;
-    --rio-claro: #1c3a2e;
-    --terra: #e2be74;
-    --terra-clara: #33291a;
-    --sol: #d9b062;
-    --linha: #34473e;
+    --papel: #0a1712;
+    --superficie: #11241c;
+    --superficie-2: #183226;
+    --tinta: #f3ecdf;
+    --tinta-suave: #bdb5a6;
+    --rio: #7fd1a8;
+    --rio-forte: #c8ecd8;
+    --rio-claro: #163a2b;
+    --terra: #f29a6f;
+    --terra-clara: #3a2117;
+    --sol: #f6c35a;
+    --turquesa: #6fd6cf;
+    --turquesa-clara: #12332f;
+    --linha: #2c4438;
     --foco: #8ab4ff;
-    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
+    --sombra-alta: 0 2px 4px rgb(0 0 0 / 0.4), 0 28px 60px -24px rgb(0 0 0 / 0.8);
     color-scheme: dark;
   }
 }
 
 /* Tema escuro escolhido explicitamente (ex.: visualizador do claude.ai) */
 :root[data-theme='dark']:not([data-contraste='alto']) {
-  --papel: #0c1a15;
-  --superficie: #13241d;
-  --superficie-2: #1b2f27;
-  --tinta: #efe8da;
-  --tinta-suave: #b9b2a2;
-  --rio: #8fcbae;
-  --rio-forte: #c4e5d3;
-  --rio-claro: #1c3a2e;
-  --terra: #e2be74;
-  --terra-clara: #33291a;
-  --sol: #d9b062;
-  --linha: #34473e;
+  --papel: #0a1712;
+  --superficie: #11241c;
+  --superficie-2: #183226;
+  --tinta: #f3ecdf;
+  --tinta-suave: #bdb5a6;
+  --rio: #7fd1a8;
+  --rio-forte: #c8ecd8;
+  --rio-claro: #163a2b;
+  --terra: #f29a6f;
+  --terra-clara: #3a2117;
+  --sol: #f6c35a;
+  --turquesa: #6fd6cf;
+  --turquesa-clara: #12332f;
+  --linha: #2c4438;
   --foco: #8ab4ff;
-  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.6);
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
+  --sombra-alta: 0 2px 4px rgb(0 0 0 / 0.4), 0 28px 60px -24px rgb(0 0 0 / 0.8);
   color-scheme: dark;
 }
 
@@ -68,14 +82,17 @@
   --superficie-2: #ffffff;
   --tinta: #000000;
   --tinta-suave: #000000;
-  --rio: #003a33;
-  --rio-forte: #001f1b;
+  --rio: #003a2a;
+  --rio-forte: #001f17;
   --rio-claro: #ffffff;
-  --terra: #4a3000;
+  --terra: #5a1a00;
   --terra-clara: #ffffff;
+  --turquesa: #003b38;
+  --turquesa-clara: #ffffff;
   --linha: #000000;
   --foco: #0033cc;
   --sombra: none;
+  --sombra-alta: none;
   color-scheme: light;
 }
 
@@ -97,7 +114,10 @@
   --color-terra: var(--terra);
   --color-terra-clara: var(--terra-clara);
   --color-sol: var(--sol);
+  --color-turquesa: var(--turquesa);
+  --color-turquesa-clara: var(--turquesa-clara);
   --color-linha: var(--linha);
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
@@ -107,6 +127,7 @@
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
   }
   body {
     background: var(--papel);
@@ -115,62 +136,155 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
     text-wrap: balance;
+    font-variation-settings: 'SOFT' 50, 'WONK' 0;
   }
   p { text-wrap: pretty; }
   a { color: var(--rio); text-decoration: underline; text-underline-offset: 0.18em; }
   :focus-visible {
     outline: 3px solid var(--foco);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
   [tabindex='-1']:focus { outline: none; }
   img { max-width: 100%; height: auto; }
+  ::selection { background: var(--sol); color: #0b3d2e; }
 }
+
+/* ---------- Movimento ---------- */
+@keyframes aparecer { from { opacity: 0.3; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+@keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes zoom-lento { from { transform: scale(1.02); } to { transform: scale(1.14); } }
+@keyframes troca-slide { 0%, 30% { opacity: 1; } 34%, 96% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes onda { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+@keyframes brilho { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(220%) skewX(-20deg); } }
+@keyframes revelar { from { transform: translateY(32px) scale(0.98); } to { transform: none; } }
+
+/* Entrada da página (uma vez, ao carregar) */
+.entrada > * { animation: subir 700ms var(--ease-suave) both; }
+.entrada > *:nth-child(2) { animation-delay: 90ms; }
+.entrada > *:nth-child(3) { animation-delay: 180ms; }
+.entrada > *:nth-child(4) { animation-delay: 270ms; }
+
+/* Revelação ao rolar: só onde o navegador suporta animação por rolagem (sem JavaScript).
+   Começa com opacidade parcial: o conteúdo nunca fica invisível. */
+@supports (animation-timeline: view()) {
+  .revelar {
+    animation: revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  .paralaxe {
+    animation: paralaxe linear both;
+    animation-timeline: view();
+  }
+  @keyframes paralaxe { from { transform: translateY(-8%) scale(1.12); } to { transform: translateY(8%) scale(1.12); } }
+}
+
+/* Transição entre páginas (View Transitions API, quando disponível) */
+::view-transition-old(root) { animation: 220ms var(--ease-suave) both saida-pagina; }
+::view-transition-new(root) { animation: 380ms var(--ease-suave) both entrada-pagina; }
+@keyframes saida-pagina { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes entrada-pagina { from { opacity: 0; transform: translateY(14px); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .revelar, .paralaxe { animation: none !important; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
 }
-
-@keyframes aparecer { from { opacity: 0.25; } to { opacity: 1; } }
+/* Movimento pausado pelo visitante */
+:root[data-movimento='pausado'] .anima { animation-play-state: paused !important; }
 
 @layer components {
-  /* Rodapé sempre escuro, com contraste fixo em todos os temas */
-  .faixa-marca { background: #0e2a21; color: #f4eee3; }
-  .faixa-marca a { color: #f4eee3; }
-  .faixa-marca .ouro { color: #e2c27e; }
+  .conteudo { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+  .texto-corrido { max-width: 68ch; }
+
+  /* Faixas escuras da marca (cabeçalho, rodapé, destaques): contraste fixo em todos os temas */
+  .faixa-marca { background: #0b3d2e; color: #fbf4e8; }
+  .faixa-marca a { color: #fbf4e8; }
+  .faixa-marca .ouro { color: #f6c35a; }
   :root[data-contraste='alto'] .faixa-marca { background: #000; color: #fff; }
   :root[data-contraste='alto'] .faixa-marca a, :root[data-contraste='alto'] .faixa-marca .ouro { color: #fff; }
-  .botao.botao-ouro { background: #e2c27e; color: #0e2a21; }
-  .botao.botao-ouro:hover { background: #f0d699; }
-  .botao.botao-claro { border-color: #f4eee3; color: #f4eee3; background: transparent; }
-  .botao-claro:hover { background: rgb(244 238 227 / 0.12); }
-  :root[data-contraste='alto'] .botao.botao-ouro { background: #fff; color: #000; }
-  .conteudo { width: min(100% - 2rem, 72rem); margin-inline: auto; }
-  .texto-corrido { max-width: 68ch; }
-  .botao {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    min-height: 44px; padding: 0.6rem 1.15rem; border-radius: 999px;
-    font-weight: 700; text-decoration: none; cursor: pointer;
-    border: 2px solid transparent; transition: background-color 150ms, color 150ms, border-color 150ms;
+
+  /* Textura de curvas de nível: mapa, descoberta, terreno */
+  .topografia {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23f6c35a' stroke-opacity='.13' stroke-width='1.2'%3E%3Cpath d='M-20 60c40-30 90-30 130 0s90 30 150 0'/%3E%3Cpath d='M-20 95c40-26 90-26 130 0s90 26 150 0'/%3E%3Cpath d='M-20 130c40-22 90-22 130 0s90 22 150 0'/%3E%3Cpath d='M-20 165c40-18 90-18 130 0s90 18 150 0'/%3E%3Cpath d='M-20 200c40-14 90-14 130 0s90 14 150 0'/%3E%3Cpath d='M-20 25c40-34 90-34 130 0s90 34 150 0'/%3E%3C/g%3E%3C/svg%3E");
   }
-  .botao-primario { background: var(--rio); color: var(--papel); }
+  .topografia-clara {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23a8471f' stroke-opacity='.08' stroke-width='1.2'%3E%3Cpath d='M-20 60c40-30 90-30 130 0s90 30 150 0'/%3E%3Cpath d='M-20 95c40-26 90-26 130 0s90 26 150 0'/%3E%3Cpath d='M-20 130c40-22 90-22 130 0s90 22 150 0'/%3E%3Cpath d='M-20 165c40-18 90-18 130 0s90 18 150 0'/%3E%3Cpath d='M-20 200c40-14 90-14 130 0s90 14 150 0'/%3E%3Cpath d='M-20 25c40-34 90-34 130 0s90 34 150 0'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Moldura em arco, como as janelas e a porta do Santuário */
+  .arco { border-radius: 999px 999px 1.5rem 1.5rem / 42% 42% 1.5rem 1.5rem; }
+
+  /* Rótulo pequeno acima de títulos */
+  .rotulo { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.02em; color: var(--terra); }
+
+  /* Botões */
+  .botao {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 48px; padding: 0.7rem 1.35rem; border-radius: 999px;
+    font-weight: 700; text-decoration: none; cursor: pointer; line-height: 1.2;
+    border: 2px solid transparent;
+    transition: background-color 200ms, color 200ms, border-color 200ms, transform 250ms var(--ease-suave), box-shadow 250ms var(--ease-suave);
+  }
+  .botao:hover { transform: translateY(-2px); }
+  .botao:active { transform: translateY(0) scale(0.98); }
+  .botao .seta { transition: transform 250ms var(--ease-suave); }
+  .botao:hover .seta { transform: translateX(4px); }
+  .botao-primario { background: var(--rio); color: var(--papel); box-shadow: 0 8px 20px -10px rgb(19 111 79 / 0.7); }
   .botao-primario:hover { background: var(--rio-forte); }
   .botao-contorno { border-color: var(--rio); color: var(--rio); background: transparent; }
   .botao-contorno:hover { background: var(--rio-claro); }
+  .botao.botao-ouro { background: #f4b43a; color: #0b3d2e; box-shadow: 0 10px 28px -10px rgb(244 180 58 / 0.75); }
+  .botao.botao-ouro:hover { background: #f8c862; }
+  .botao.botao-ouro::after {
+    content: ''; position: absolute; inset: 0 auto 0 0; width: 40%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  .botao.botao-ouro:hover::after { animation: brilho 700ms var(--ease-suave); }
+  .botao.botao-vidro {
+    border-color: rgb(251 244 232 / 0.55); color: #fbf4e8;
+    background: rgb(11 61 46 / 0.35); backdrop-filter: blur(8px);
+  }
+  .botao.botao-vidro:hover { background: rgb(11 61 46 / 0.6); border-color: #fbf4e8; }
+  .botao.botao-claro { border-color: #fbf4e8; color: #fbf4e8; background: transparent; }
+  .botao.botao-claro:hover { background: rgb(251 244 232 / 0.12); }
+  :root[data-contraste='alto'] .botao.botao-ouro, :root[data-contraste='alto'] .botao.botao-vidro { background: #fff; color: #000; border-color: #000; }
+
+  /* Cartão de foto imersivo */
+  .cartao-foto { position: relative; isolation: isolate; overflow: hidden; border-radius: 1.75rem; box-shadow: var(--sombra); transition: transform 450ms var(--ease-suave), box-shadow 450ms var(--ease-suave); }
+  .cartao-foto:hover, .cartao-foto:focus-within { transform: translateY(-6px); box-shadow: var(--sombra-alta); }
+  .cartao-foto .foto { transition: transform 1200ms var(--ease-suave); }
+  .cartao-foto:hover .foto, .cartao-foto:focus-within .foto { transform: scale(1.07); }
+  .veu { background: linear-gradient(180deg, rgb(11 30 23 / 0.05) 0%, rgb(11 30 23 / 0.2) 22%, rgb(10 28 21 / 0.78) 50%, rgb(8 24 18 / 0.96) 100%); }
+  .cartao-foto h2, .cartao-foto h3, .cartao-foto p, .cartao-foto li { text-shadow: 0 1px 12px rgb(0 0 0 / 0.55); }
+
+  /* Equalizador animado do player */
+  .equalizador span { display: block; width: 4px; border-radius: 2px; background: currentColor; transform-origin: bottom; animation: onda 900ms ease-in-out infinite; }
+  .equalizador span:nth-child(2) { animation-delay: -300ms; }
+  .equalizador span:nth-child(3) { animation-delay: -600ms; }
+  .equalizador span:nth-child(4) { animation-delay: -150ms; }
+  .equalizador.parado span { animation-play-state: paused; transform: scaleY(0.35); }
+
   .sr-only-focavel:not(:focus) {
     position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
   /* Espaço reservado: deixa claro que a fotografia original ainda não foi enviada */
   .reservado {
     background-color: var(--superficie-2);
-    background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--linha) 55%, transparent) 14px 15px);
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--linha) 70%, transparent) 14px 15px);
   }
+  /* Barra de progresso do áudio */
+  .progresso { accent-color: #f4b43a; }
 }

@@ -53,6 +53,7 @@ export const ESTABELECIMENTOS: Estabelecimento[] = [
     endereco: 'Avenida Brasil, 1412, Centro, Alto Piquiri (PR), CEP 87580-000',
     linkMapa:
       'https://www.google.com/maps/place/Posto+Delta+-+Centro,+Alto+Piquiri/@-24.0228603,-53.4442166,1030m/data=!3m2!1e3!4b1!4m6!3m5!1s0x94f321087c959e0b:0x57d07cd80a90822a!8m2!3d-24.0228603!4d-53.4416417!16s%2Fg%2F11rtdp55tk',
+    fotografia: { arquivo: '/midia/comercio/posto-delta.webp', textoAlternativo: 'Posto Delta no Centro de Alto Piquiri, com a cobertura azul e as bombas de combustível' },
     parceiro: true,
   },
   {

@@ -61,6 +61,13 @@ describe('Galeria', () => {
     expect(screen.getByRole('button', { name: /Mostrar fotografia 1 de 3/ })).toHaveFocus();
   });
 
+  it('oferece tela cheia para fotos publicadas e mostra subtítulos da descrição', async () => {
+    const comSub: Fotografia[] = [{ ...fotos[0], descricaoTextual: ['Texto.', '## Importância histórica', 'Mais texto.'] }];
+    render(<Galeria fotografias={comSub} nomeLugar="Lugar" />);
+    expect(screen.getByRole('button', { name: /em tela cheia/ })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Importância histórica', level: 4 })).toBeInTheDocument();
+  });
+
   it('mantém leitura e audição como recursos separados', () => {
     render(<Galeria fotografias={fotos} nomeLugar="Lugar" />);
     expect(screen.getByRole('heading', { name: /Ler a descrição/ })).toBeInTheDocument();

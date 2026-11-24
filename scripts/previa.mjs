@@ -18,11 +18,10 @@ const js = ler('.js').replace(/<\/script/gi, '<\\/script');
 const { renderizar } = await import(pathToFileURL(join(raiz, 'dist-previa-ssr', 'entry-server.js')).href);
 const fav = readFileSync(join(raiz, 'public', 'favicon.svg'), 'base64');
 
-// Embute as imagens de /public referenciadas como "/img/..." (o arquivo único não tem servidor).
-const embutir = (texto) => texto.replace(/\/img\/[\w.-]+\.(webp|png|jpg|svg)/g, (m) => {
-  const tipo = m.endsWith('.svg') ? 'image/svg+xml' : m.endsWith('.png') ? 'image/png' : m.endsWith('.jpg') ? 'image/jpeg' : 'image/webp';
-  return `data:${tipo};base64,${readFileSync(join(raiz, 'public', m)).toString('base64')}`;
-});
+// Na prévia, as mídias ficam ao lado da página: troca "/img/…" e "/midia/…" por caminhos relativos.
+// Cada arquivo usado é listado em previa-arquivos.json para publicar junto com a página.
+const usados = new Set();
+const embutir = (texto) => texto.replace(/(["'`(\s])\/(img|midia)\//g, (_m, antes, pasta) => `${antes}${pasta}/`);
 
 const html0 = `<title>O Lado de Lá Turismo</title>
 <meta name="description" content="Prévia privada do site O Lado de Lá Turismo.">
@@ -33,4 +32,8 @@ const html0 = `<title>O Lado de Lá Turismo</title>
 `;
 const html = embutir(html0);
 writeFileSync(saida, html);
+// Lista de mídias referenciadas (inclui as montadas em tempo de execução: todas as de public/midia e public/img)
+const listar = (dir) => readdirSync(join(raiz, 'public', dir), { recursive: true }).filter((f) => /\.(webp|png|jpg|svg|mp3)$/.test(String(f))).map((f) => `${dir}/${f}`);
+for (const f of [...listar('img'), ...listar('midia')]) usados.add(f);
+writeFileSync(saida.replace(/\.html$/, '-arquivos.json'), JSON.stringify(Object.fromEntries([...usados].map((f) => [f, join(raiz, 'public', f)])), null, 1));
 console.log(`Prévia gerada: ${saida} (${(html.length / 1024).toFixed(0)} KB)`);

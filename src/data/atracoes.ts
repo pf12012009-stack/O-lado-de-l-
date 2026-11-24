@@ -1,4 +1,5 @@
 import { FONTES } from './fontes';
+import { MIDIA_ORIGINAL } from './midia-original';
 import type { Atracao, Categoria, CategoriaId, Fotografia } from './tipos';
 
 export const CATEGORIAS: Categoria[] = [
@@ -33,8 +34,8 @@ export function categoriaPorId(id: CategoriaId): Categoria {
  * O `id` segue o nome do arquivo usado no site antigo e liga imagem, descrição textual e audiodescrição.
  * Para integrar, preencha `arquivo`, `textoAlternativo`, `descricaoTextual` e `audiodescricao` (veja docs/MIDIA.md).
  */
-function fotos(lista: [id: string, titulo: string][]): Fotografia[] {
-  return lista.map(([id, titulo]) => ({ id, titulo }));
+function fotos(slug: string, lista: [id: string, titulo: string][]): Fotografia[] {
+  return lista.map(([id, titulo]) => ({ id, titulo, ...MIDIA_ORIGINAL[slug]?.[id] }));
 }
 
 const CREDITO_EPT = 'Fotografias e textos: Guia Virtual de Turismo e Patrimônio Cultural de Alto Piquiri, Projeto EPT, Colégio Estadual Alto Piquiri, 2026.';
@@ -68,7 +69,7 @@ export const ATRACOES: Atracao[] = [
       { rotulo: 'WhatsApp do Santuário', valor: '(44) 98828-3669', href: 'https://wa.me/5544988283669' },
       { rotulo: 'E-mail da paróquia', valor: 'contato@paroquiaaltopiquiri.com.br', href: 'mailto:contato@paroquiaaltopiquiri.com.br' },
     ],
-    fotografias: fotos([
+    fotografias: fotos('santuario-sao-jose', [
       ['fachada', 'Fachada do Santuário Diocesano São José'],
       ['sao-jose-menino-jesus', 'Imagem de São José com o Menino Jesus'],
       ['pia-batismal-nicho-mariano', 'Pia Batismal e Nicho Mariano'],
@@ -94,7 +95,7 @@ export const ATRACOES: Atracao[] = [
       { texto: 'É uma das quatro capelas visitadas no Tour Capelas, todo dia 19.', fonte: FONTES.bemdito },
     ],
     localizacao: { municipio: 'Alto Piquiri (PR)', endereco: 'Comunidade de Mirante do Piquiri', buscaMapa: 'Capela Nossa Senhora Aparecida, Mirante do Piquiri, Alto Piquiri, PR' },
-    fotografias: fotos([
+    fotografias: fotos('capela-nossa-senhora-aparecida', [
       ['vista-externa', 'Vista externa do conjunto religioso'],
       ['fachada-torre', 'Fachada principal e torre sineira'],
       ['interior-nave', 'Interior da capela: nave e altar principal'],
@@ -122,7 +123,7 @@ export const ATRACOES: Atracao[] = [
       { texto: 'É uma das quatro capelas visitadas no Tour Capelas, todo dia 19.', fonte: FONTES.bemdito },
     ],
     localizacao: { municipio: 'Alto Piquiri (PR)', endereco: 'Distrito de Paulistânia', buscaMapa: 'Capela Santo Antônio, Paulistânia, Alto Piquiri, PR' },
-    fotografias: fotos([
+    fotografias: fotos('capela-santo-antonio', [
       ['sao-miguel-arcanjo', 'Imagem de São Miguel Arcanjo'],
       ['sacrario', 'Sacrário da Capela Santo Antônio'],
       ['vitral-espirito-santo', 'Vitral do Espírito Santo'],
@@ -139,7 +140,7 @@ export const ATRACOES: Atracao[] = [
       { texto: 'As corredeiras dos Apertados do Rio Piquiri são citadas pela ficha oficial da Ciclorrota Pedal das Águas como um dos principais cartões-postais da região.', fonte: FONTES.pedalaRota },
     ],
     localizacao: { municipio: 'Alto Piquiri (PR)', buscaMapa: 'Rio Piquiri, Alto Piquiri, PR' },
-    fotografias: fotos([['rio-piquiri', 'Quedas d’água do Rio Piquiri']]),
+    fotografias: fotos('rio-piquiri', [['rio-piquiri', 'Quedas d’água do Rio Piquiri']]),
   },
   {
     slug: 'rio-guere',
@@ -174,7 +175,7 @@ export const ATRACOES: Atracao[] = [
     ],
     localizacao: { municipio: 'Alto Piquiri (PR)', buscaMapa: 'Alto Piquiri, PR' },
     links: [{ titulo: 'Ficha oficial com mapa em PDF e rota em GPX (Pedala Paraná)', url: FONTES.pedalaRota.url }],
-    fotografias: fotos([['abertura', 'Ciclistas na abertura da Ciclorrota Pedal das Águas']]),
+    fotografias: fotos('pedal-das-aguas', [['abertura', 'Ciclistas na abertura da Ciclorrota Pedal das Águas']]),
   },
 ];
 

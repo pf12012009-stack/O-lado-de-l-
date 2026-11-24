@@ -13,8 +13,8 @@ export function DescricaoTextual({ foto, posicao }: { foto: Fotografia; posicao:
   const [aberta, setAberta] = useState(false);
 
   return (
-    <section aria-labelledby={id} className="rounded-2xl border-2 border-rio/25 bg-rio-claro/60 p-5">
-      <h3 id={id} className="flex items-center gap-2 text-xl font-semibold text-rio">
+    <section aria-labelledby={id} className="relative overflow-hidden rounded-[1.75rem] border border-linha bg-superficie p-6 shadow-[var(--sombra)] before:absolute before:inset-y-0 before:left-0 before:w-1.5 before:bg-[#f4b43a]">
+      <h3 id={id} className="flex items-center gap-2 text-2xl font-semibold text-rio">
         <IconeTexto /> Ler a descrição
       </h3>
       <p className="mt-1 text-sm text-tinta-suave">
@@ -24,9 +24,15 @@ export function DescricaoTextual({ foto, posicao }: { foto: Fotografia; posicao:
         <>
           <div
             id={`${id}-texto`}
-            className={`mt-3 space-y-3 texto-corrido ${longa && !aberta ? 'max-h-48 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)]' : ''}`}
+            className={`mt-3 space-y-3 texto-corrido ${longa && !aberta ? 'max-h-56 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent)]' : ''}`}
           >
-            {paragrafos.map((p, i) => <p key={i}>{p}</p>)}
+            {paragrafos.map((p, i) =>
+              p.startsWith('## ') ? (
+                <h4 key={i} className="pt-2 text-lg font-semibold text-terra">{p.slice(3)}</h4>
+              ) : (
+                <p key={i}>{p}</p>
+              ),
+            )}
           </div>
           {longa && (
             <button

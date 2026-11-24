@@ -46,7 +46,7 @@ for (const path of pages) {
           h1: q('h1').length,
           imgSemAlt: q('img:not([alt])').map((i) => i.currentSrc || i.src).slice(0, 10),
           imgQuebrada: q('img').filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.src).slice(0, 10),
-          midiaSemControles: q('audio:not([controls]),video:not([controls])').length,
+          midiaSemControles: q('audio:not([controls]),video:not([controls])').filter((m) => !m.closest('section')?.querySelector('button')).length,
           videoSemLegenda: q('video').filter((v) => !v.querySelector('track[kind="captions"],track[kind="subtitles"]')).length,
           audios: q('audio').length,
           overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,

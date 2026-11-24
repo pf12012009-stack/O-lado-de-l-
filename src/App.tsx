@@ -1,5 +1,6 @@
 import { Route, Router, Switch } from 'wouter';
 import { memoryLocation } from 'wouter/memory-location';
+import { comTransicao, useLocalizacaoComTransicao } from './lib/transicao';
 import { Layout } from './components/Layout';
 import { AtracaoPagina } from './pages/AtracaoPagina';
 import { Atracoes, CategoriaPagina } from './pages/Atracoes';
@@ -10,10 +11,16 @@ import { NaoEncontrada } from './pages/NaoEncontrada';
 /** Modo prévia (arquivo único): navegação em memória, sem depender do endereço da página. */
 const PREVIA = import.meta.env.VITE_PREVIA === '1';
 const memoria = PREVIA ? memoryLocation({ path: '/' }) : undefined;
+const hookMemoria = memoria
+  ? (): ReturnType<typeof memoria.hook> => {
+      const [l, n] = memoria.hook();
+      return [l, comTransicao(n)];
+    }
+  : undefined;
 
 export function App({ caminho }: { caminho?: string }) {
   return (
-    <Router ssrPath={caminho} hook={caminho === undefined ? memoria?.hook : undefined}>
+    <Router ssrPath={caminho} hook={caminho === undefined ? hookMemoria ?? useLocalizacaoComTransicao : undefined}>
       <Layout>
         <Switch>
           <Route path="/"><Inicio /></Route>

@@ -67,19 +67,26 @@ export function PlayerAudiodescricao({ foto, posicao }: Props) {
   return (
     <section
       aria-labelledby={idTitulo}
-      className="rounded-2xl border-2 border-terra/40 bg-terra-clara/60 p-5"
+      className="faixa-marca topografia relative overflow-hidden rounded-[1.75rem] p-6 shadow-[var(--sombra-alta)]"
     >
-      <h3 id={idTitulo} className="flex items-center gap-2 text-lg font-bold text-terra">
-        <IconeFone /> Ouvir a audiodescrição
-      </h3>
+      <div className="flex items-start justify-between gap-3">
+        <h3 id={idTitulo} className="flex items-center gap-2 text-2xl font-semibold">
+          <IconeFone /> Ouvir a audiodescrição
+        </h3>
+        {ad && (
+          <span className={`equalizador ouro flex h-8 items-end gap-1 ${tocando ? '' : 'parado'}`} aria-hidden="true">
+            <span className="h-full" /><span className="h-full" /><span className="h-full" /><span className="h-full" />
+          </span>
+        )}
+      </div>
 
       {!ad ? (
-        <p className="mt-2 text-tinta-suave">
+        <p className="mt-3 opacity-90">
           A audiodescrição narrada desta fotografia está em produção e será publicada aqui.
         </p>
       ) : (
         <div className="mt-3">
-          <p className="text-sm text-tinta-suave">
+          <p className="text-sm opacity-90">
             Narração da {posicao}: {foto.titulo}
             {ad.narracao ? `. Voz de ${ad.narracao}` : ''}.
           </p>
@@ -101,16 +108,16 @@ export function PlayerAudiodescricao({ foto, posicao }: Props) {
             <button
               type="button"
               onClick={alternar}
-              className="botao botao-primario min-w-36"
+              className="botao botao-ouro min-w-36 text-lg"
               aria-label={`${tocando ? 'Pausar' : 'Ouvir'} audiodescrição da ${posicao}`}
             >
               {tocando ? <IconePausa /> : <IconePlay />}
               <span aria-hidden="true">{tocando ? 'Pausar' : 'Ouvir'}</span>
             </button>
-            <button type="button" onClick={() => pular(-10)} className="botao botao-contorno px-3" aria-label="Voltar 10 segundos">
+            <button type="button" onClick={() => pular(-10)} className="botao botao-claro px-3" aria-label="Voltar 10 segundos">
               <IconeVoltar10 />
             </button>
-            <button type="button" onClick={() => pular(10)} className="botao botao-contorno px-3" aria-label="Avançar 10 segundos">
+            <button type="button" onClick={() => pular(10)} className="botao botao-claro px-3" aria-label="Avançar 10 segundos">
               <IconeAvancar10 />
             </button>
             <label htmlFor={idVelocidade} className="ml-auto flex items-center gap-2 text-sm font-bold">
@@ -119,7 +126,7 @@ export function PlayerAudiodescricao({ foto, posicao }: Props) {
                 id={idVelocidade}
                 value={velocidade}
                 onChange={(e) => setVelocidade(Number(e.target.value))}
-                className="min-h-11 rounded-lg border-2 border-linha bg-superficie px-2 text-tinta"
+                className="min-h-11 rounded-xl border-2 border-[#fbf4e8]/60 bg-[#0b3d2e] px-2 text-[#fbf4e8]"
               >
                 {VELOCIDADES.map((v) => (
                   <option key={v} value={v}>{String(v).replace('.', ',')}x</option>
@@ -141,13 +148,13 @@ export function PlayerAudiodescricao({ foto, posicao }: Props) {
               }}
               aria-label="Posição da narração"
               aria-valuetext={`${tempoFalado(atual)} de ${tempoFalado(duracao)}`}
-              className="h-11 flex-1 accent-[var(--terra)]"
+              className="progresso h-11 flex-1"
             />
             <span className="w-12 text-right text-sm tabular-nums" aria-hidden="true">{formatarTempo(duracao)}</span>
           </div>
 
           {erro && (
-            <p role="alert" className="mt-2 font-bold text-terra">
+            <p role="alert" className="ouro mt-2 font-bold">
               Não foi possível reproduzir o áudio. Verifique a conexão e tente de novo.
             </p>
           )}

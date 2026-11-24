@@ -4,17 +4,17 @@ import { CardEstabelecimento } from '../components/Cards';
 import { ListaDeContatos, ListaDeFatos } from '../components/Fontes';
 import { IconeMapa } from '../components/Icones';
 import { Pagina } from '../components/Layout';
+import { TopoFoto } from '../components/TopoFoto';
+import { fotoDe } from '../lib/imagens';
 import { BUSCAS_NO_MAPA, CATEGORIAS_COMERCIO, ESTABELECIMENTOS, linkBuscaMapa } from '../data/comercio';
 import { CANAIS, CIDADE, SITE } from '../data/site';
 
-function Topo({ titulo, children }: { titulo: string; children?: ReactNode }) {
+function Topo({ titulo, foto, posicao, children }: { titulo: string; foto?: [slug: string, id: string]; posicao?: string; children?: ReactNode }) {
   return (
-    <div className="faixa-marca pb-12 pt-12">
-      <div className="conteudo">
-        <h1 className="text-4xl font-semibold sm:text-6xl">{titulo}</h1>
-        {children && <div className="mt-4 max-w-3xl space-y-3 text-lg opacity-95">{children}</div>}
-      </div>
-    </div>
+    <TopoFoto foto={foto ? fotoDe(...foto) : undefined} posicao={posicao}>
+      <h1 className="text-5xl font-semibold sm:text-7xl">{titulo}</h1>
+      {children && <div className="mt-4 max-w-2xl space-y-3 text-lg text-[#fbf4e8]/95">{children}</div>}
+    </TopoFoto>
   );
 }
 
@@ -79,7 +79,7 @@ export function Comercio() {
 export function Sobre() {
   return (
     <Pagina titulo="Sobre o projeto" descricao="O Lado de Lá Turismo é uma plataforma de turismo virtual, conhecimento, inclusão e acessibilidade de Alto Piquiri (PR).">
-      <Topo titulo="Sobre o O Lado de Lá">
+      <Topo titulo="Sobre o O Lado de Lá" foto={['capela-nossa-senhora-aparecida', 'vista-externa']} posicao="center 60%">
         <p>{SITE.lema}</p>
       </Topo>
       <div className="conteudo mt-12 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
@@ -131,7 +131,7 @@ export function Contato() {
 export function Acessibilidade() {
   return (
     <Pagina titulo="Acessibilidade" descricao="Recursos de acessibilidade do O Lado de Lá Turismo e como usá-los.">
-      <Topo titulo="Acessibilidade no site">
+      <Topo titulo="Acessibilidade no site" foto={['capela-santo-antonio', 'vitral-espirito-santo']} posicao="center 35%">
         <p>A acessibilidade é parte da identidade deste projeto. O site segue as diretrizes WCAG 2.2, nível AA.</p>
       </Topo>
       <div className="conteudo mt-12 texto-corrido space-y-10 text-lg">

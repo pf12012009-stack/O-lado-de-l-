@@ -49,3 +49,24 @@ export const IconeImagem = (p: P) => (
 export const IconeExterno = (p: P) => (
   <svg {...base(p)} width={16} height={16}><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg>
 );
+export const IconeIgreja = (p: P) => (
+  <svg {...base(p)}><path d="M12 2v4M10 4h4" /><path d="M6 21V11l6-4 6 4v10" /><path d="M3 21h18" /><path d="M10 21v-4a2 2 0 0 1 4 0v4" /></svg>
+);
+export const IconeBicicleta = (p: P) => (
+  <svg {...base(p)}><circle cx="5.5" cy="17" r="3.5" /><circle cx="18.5" cy="17" r="3.5" /><path d="M5.5 17 9 9h6l3.5 8M9 9 12 17h-1M14 5h2l1 4" /></svg>
+);
+export const IconeFolha = (p: P) => (
+  <svg {...base(p)}><path d="M4 20c0-9 6-15 16-16-1 10-7 16-16 16Z" /><path d="M4 20 14 10" /></svg>
+);
+export const IconeSeta = (p: P) => (
+  <svg {...base(p)} className={`seta ${p.className ?? ''}`}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+);
+export const IconeExpandir = (p: P) => (
+  <svg {...base(p)}><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+);
+export const IconeCamera = (p: P) => (
+  <svg {...base(p)}><path d="M4 8h3l2-3h6l2 3h3v11H4Z" /><circle cx="12" cy="13" r="3.5" /></svg>
+);
+export const IconeLoja = (p: P) => (
+  <svg {...base(p)}><path d="M3 9l2-5h14l2 5M4 9v11h16V9M3 9h18M9 20v-6h6v6" /></svg>
+);

@@ -32,7 +32,7 @@ function Cabecalho() {
         <Link
           href={m.href}
           aria-current={ativo(local, m.href) ? 'page' : undefined}
-          className={`${classe} flex min-h-11 items-center rounded-full px-3 font-bold no-underline hover:bg-white/10 aria-[current=page]:bg-[#e2c27e] aria-[current=page]:text-[#0e2a21]`}
+          className={`${classe} flex min-h-11 items-center rounded-full px-3.5 font-bold no-underline transition-colors hover:bg-white/10 aria-[current=page]:bg-[#f4b43a] aria-[current=page]:text-[#0b3d2e]`}
         >
           {m.rotulo}
         </Link>
@@ -40,8 +40,8 @@ function Cabecalho() {
     ));
 
   return (
-    <header className="faixa-marca border-b-2 border-[#c9a04e]/50">
-      <div className="conteudo flex min-h-20 items-center justify-between gap-4 py-3">
+    <header className="faixa-marca sticky top-0 z-40 border-b border-[#f4b43a]/40 shadow-[0_8px_24px_-16px_rgb(0_0_0/0.6)] [background:rgb(11_61_46/0.94)] supports-[backdrop-filter]:backdrop-blur-md">
+      <div className="conteudo flex min-h-18 items-center justify-between gap-4 py-2">
         <Link href="/" className="no-underline" aria-label={`${SITE.nome}, página inicial`}>
           <Marca />
         </Link>
@@ -88,8 +88,11 @@ function Cabecalho() {
 
 function Rodape() {
   return (
-    <footer className="faixa-marca mt-24 border-t-2 border-[#c9a04e]/50">
-      <div className="conteudo grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
+    <footer className="faixa-marca topografia relative mt-28">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="absolute inset-x-0 -top-px h-10 w-full sm:h-14" aria-hidden="true" focusable="false">
+        <path d="M0 0h1440v20c-160 26-340 30-540 10S540 4 360 22 120 40 0 26Z" fill="var(--papel)" />
+      </svg>
+      <div className="conteudo grid gap-10 pb-12 pt-20 md:grid-cols-[1.5fr_1fr_1fr]">
         <div className="space-y-4">
           <Marca tamanho="grande" />
           <p className="max-w-md">{SITE.lema}</p>
@@ -122,7 +125,7 @@ function Rodape() {
 export function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <a href="#conteudo" className="sr-only-focavel fixed left-3 top-3 z-50 rounded-lg bg-[#e2c27e] px-4 py-3 font-bold text-[#0e2a21]">
+      <a href="#conteudo" className="sr-only-focavel fixed left-3 top-3 z-50 rounded-lg bg-[#f4b43a] px-4 py-3 font-bold text-[#0b3d2e]">
         Pular para o conteúdo
       </a>
       <Cabecalho />
