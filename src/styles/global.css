@@ -1,62 +1,63 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/fraunces';
 @import '@fontsource-variable/atkinson-hyperlegible-next';
 
-/* Tokens de cor: verde dos rios, terra roxa do noroeste do Paraná, sol de fim de tarde. */
+/* Tokens da marca (brasão): verde-mata, ouro e creme.
+   rio = verde da marca · terra = ouro escuro (texto/realce) · sol = ouro decorativo */
 :root {
-  --papel: #f2f7f5;
-  --superficie: #ffffff;
-  --superficie-2: #e4efeb;
-  --tinta: #13221f;
-  --tinta-suave: #4a5d59;
-  --rio: #0d4f47;
-  --rio-forte: #08362f;
-  --rio-claro: #d3e9e3;
-  --terra: #8a3420;
-  --terra-clara: #f6e1d9;
-  --sol: #e7a33e;
-  --linha: #b9ccc6;
+  --papel: #f4eee3;
+  --superficie: #fffdf8;
+  --superficie-2: #eae2d2;
+  --tinta: #17261f;
+  --tinta-suave: #4b5850;
+  --rio: #1e4d3a;
+  --rio-forte: #0e2a21;
+  --rio-claro: #dde9e0;
+  --terra: #7a5418;
+  --terra-clara: #f3e7cc;
+  --sol: #c9a04e;
+  --linha: #d3c7ae;
   --foco: #0b57d0;
-  --sombra: 0 1px 2px rgb(8 54 47 / 0.08), 0 8px 24px -12px rgb(8 54 47 / 0.25);
+  --sombra: 0 1px 2px rgb(14 42 33 / 0.08), 0 10px 28px -14px rgb(14 42 33 / 0.3);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema='claro']):not([data-theme='light']):not([data-contraste='alto']) {
-    --papel: #0c1715;
-    --superficie: #13211e;
-    --superficie-2: #1a2c28;
-    --tinta: #e8f1ee;
-    --tinta-suave: #a9bcb7;
-    --rio: #74d3c1;
-    --rio-forte: #a6e6da;
-    --rio-claro: #17352f;
-    --terra: #f3a487;
-    --terra-clara: #3a1f17;
-    --sol: #f0b65a;
-    --linha: #34504a;
+    --papel: #0c1a15;
+    --superficie: #13241d;
+    --superficie-2: #1b2f27;
+    --tinta: #efe8da;
+    --tinta-suave: #b9b2a2;
+    --rio: #8fcbae;
+    --rio-forte: #c4e5d3;
+    --rio-claro: #1c3a2e;
+    --terra: #e2be74;
+    --terra-clara: #33291a;
+    --sol: #d9b062;
+    --linha: #34473e;
     --foco: #8ab4ff;
-    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
 }
 
 /* Tema escuro escolhido explicitamente (ex.: visualizador do claude.ai) */
 :root[data-theme='dark']:not([data-contraste='alto']) {
-  --papel: #0c1715;
-  --superficie: #13211e;
-  --superficie-2: #1a2c28;
-  --tinta: #e8f1ee;
-  --tinta-suave: #a9bcb7;
-  --rio: #74d3c1;
-  --rio-forte: #a6e6da;
-  --rio-claro: #17352f;
-  --terra: #f3a487;
-  --terra-clara: #3a1f17;
-  --sol: #f0b65a;
-  --linha: #34504a;
+  --papel: #0c1a15;
+  --superficie: #13241d;
+  --superficie-2: #1b2f27;
+  --tinta: #efe8da;
+  --tinta-suave: #b9b2a2;
+  --rio: #8fcbae;
+  --rio-forte: #c4e5d3;
+  --rio-claro: #1c3a2e;
+  --terra: #e2be74;
+  --terra-clara: #33291a;
+  --sol: #d9b062;
+  --linha: #34473e;
   --foco: #8ab4ff;
-  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.6);
   color-scheme: dark;
 }
 
@@ -70,7 +71,7 @@
   --rio: #003a33;
   --rio-forte: #001f1b;
   --rio-claro: #ffffff;
-  --terra: #5c1608;
+  --terra: #4a3000;
   --terra-clara: #ffffff;
   --linha: #000000;
   --foco: #0033cc;
@@ -83,7 +84,7 @@
 :root[data-texto='muito-maior'] { font-size: 131.25%; }
 
 @theme {
-  --font-display: 'Bricolage Grotesque Variable', 'Trebuchet MS', sans-serif;
+  --font-display: 'Fraunces Variable', 'Georgia', serif;
   --font-sans: 'Atkinson Hyperlegible Next Variable', 'Verdana', sans-serif;
   --color-papel: var(--papel);
   --color-superficie: var(--superficie);
@@ -142,10 +143,16 @@
 
 @layer components {
   /* Rodapé sempre escuro, com contraste fixo em todos os temas */
-  .rodape { background: #08362f; color: #e8f1ee; }
-  .rodape a { color: #e8f1ee; }
-  :root[data-contraste='alto'] .rodape { background: #000; color: #fff; }
-  :root[data-contraste='alto'] .rodape a { color: #fff; }
+  .faixa-marca { background: #0e2a21; color: #f4eee3; }
+  .faixa-marca a { color: #f4eee3; }
+  .faixa-marca .ouro { color: #e2c27e; }
+  :root[data-contraste='alto'] .faixa-marca { background: #000; color: #fff; }
+  :root[data-contraste='alto'] .faixa-marca a, :root[data-contraste='alto'] .faixa-marca .ouro { color: #fff; }
+  .botao.botao-ouro { background: #e2c27e; color: #0e2a21; }
+  .botao.botao-ouro:hover { background: #f0d699; }
+  .botao.botao-claro { border-color: #f4eee3; color: #f4eee3; background: transparent; }
+  .botao-claro:hover { background: rgb(244 238 227 / 0.12); }
+  :root[data-contraste='alto'] .botao.botao-ouro { background: #fff; color: #000; }
   .conteudo { width: min(100% - 2rem, 72rem); margin-inline: auto; }
   .texto-corrido { max-width: 68ch; }
   .botao {

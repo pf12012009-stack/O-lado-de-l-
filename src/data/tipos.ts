@@ -8,17 +8,27 @@
  * Descrição textual e audiodescrição são recursos independentes: um nunca substitui o outro.
  */
 
-export type CategoriaId = 'religioso' | 'aventura';
+export type CategoriaId = 'religioso' | 'aventura' | 'natureza';
 
 export interface Categoria {
   id: CategoriaId;
   nome: string;
   descricao: string;
+  /** Rota da página da categoria, ex.: /turismo-religioso */
+  caminho: string;
 }
 
 export interface Fonte {
   titulo: string;
-  url: string;
+  /** Link público da fonte. Ausente para material impresso ou do próprio projeto. */
+  url?: string;
+}
+
+export interface Contato {
+  rotulo: string;
+  valor: string;
+  /** tel:, https://wa.me/…, mailto: ou https:// */
+  href?: string;
 }
 
 /** Informação factual sempre ligada à fonte que a confirma. */
@@ -68,22 +78,27 @@ export interface Atracao {
   slug: string;
   nome: string;
   categoria: CategoriaId;
+  /** Bairro, distrito ou comunidade, ex.: "Centro", "Paulistânia" */
+  local?: string;
   /** Frase curta usada no card */
   resumo: string;
   /** Texto de apresentação da página (parágrafos) */
   apresentacao: string[];
   fatos: Fato[];
   localizacao: Localizacao;
-  linkOficial?: Fonte;
+  /** Links oficiais (site do lugar, ficha da rota, diocese…) */
+  links?: Fonte[];
+  contatos?: Contato[];
+  /** Avisos importantes ao visitante, sempre com fonte */
+  avisos?: Fato[];
   fotografias: Fotografia[];
+  /** Vídeo em Libras feito por intérprete. Ausente = pendente (nunca avatar automático). */
+  libras?: { video: string; legendas?: string; interprete?: string };
+  /** Crédito das fotografias e textos */
+  credito?: string;
 }
 
-export type CategoriaComercioId =
-  | 'alimentacao'
-  | 'hospedagem'
-  | 'compras'
-  | 'servicos'
-  | 'lazer';
+export type CategoriaComercioId = 'farmacia' | 'hotel' | 'restaurante' | 'posto' | 'supermercado';
 
 export interface Estabelecimento {
   slug: string;
@@ -94,6 +109,8 @@ export interface Estabelecimento {
   linkMapa?: string;
   /** Somente números com DDI e DDD, ex.: 5544999999999 */
   whatsapp?: string;
+  /** Mensagem já escrita ao abrir o WhatsApp */
+  mensagemWhatsapp?: string;
   fotografia?: { arquivo: string; textoAlternativo: string };
   parceiro?: boolean;
 }

@@ -17,10 +17,12 @@ export function App({ caminho }: { caminho?: string }) {
       <Layout>
         <Switch>
           <Route path="/"><Inicio /></Route>
-          <Route path="/atracoes"><Atracoes /></Route>
-          <Route path="/atracoes/:slug">{(p) => <AtracaoPagina slug={p.slug} />}</Route>
-          <Route path="/categoria/:id">{(p) => <CategoriaPagina id={p.id} />}</Route>
-          <Route path="/comercio"><Comercio /></Route>
+          <Route path="/pontos-turisticos"><Atracoes /></Route>
+          <Route path="/pontos-turisticos/:slug">{(p) => <AtracaoPagina slug={p.slug} />}</Route>
+          <Route path="/turismo-religioso"><CategoriaPagina id="religioso" /></Route>
+          <Route path="/turismo-de-aventura"><CategoriaPagina id="aventura" /></Route>
+          <Route path="/turismo-de-natureza"><CategoriaPagina id="natureza" /></Route>
+          <Route path="/comercio-local"><Comercio /></Route>
           <Route path="/sobre"><Sobre /></Route>
           <Route path="/contato"><Contato /></Route>
           <Route path="/acessibilidade"><Acessibilidade /></Route>

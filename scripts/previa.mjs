@@ -18,12 +18,19 @@ const js = ler('.js').replace(/<\/script/gi, '<\\/script');
 const { renderizar } = await import(pathToFileURL(join(raiz, 'dist-previa-ssr', 'entry-server.js')).href);
 const fav = readFileSync(join(raiz, 'public', 'favicon.svg'), 'base64');
 
-const html = `<title>O Lado de Lá Turismo</title>
+// Embute as imagens de /public referenciadas como "/img/..." (o arquivo único não tem servidor).
+const embutir = (texto) => texto.replace(/\/img\/[\w.-]+\.(webp|png|jpg|svg)/g, (m) => {
+  const tipo = m.endsWith('.svg') ? 'image/svg+xml' : m.endsWith('.png') ? 'image/png' : m.endsWith('.jpg') ? 'image/jpeg' : 'image/webp';
+  return `data:${tipo};base64,${readFileSync(join(raiz, 'public', m)).toString('base64')}`;
+});
+
+const html0 = `<title>O Lado de Lá Turismo</title>
 <meta name="description" content="Prévia privada do site O Lado de Lá Turismo.">
 <link rel="icon" href="data:image/svg+xml;base64,${fav}">
 <style>${css}</style>
 <div id="raiz" data-caminho="/">${renderizar('/')}</div>
 <script type="module">${js}</script>
 `;
+const html = embutir(html0);
 writeFileSync(saida, html);
 console.log(`Prévia gerada: ${saida} (${(html.length / 1024).toFixed(0)} KB)`);

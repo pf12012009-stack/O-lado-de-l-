@@ -22,9 +22,10 @@ describe('Integridade do conteúdo', () => {
     for (const a of ATRACOES) for (const f of a.fotografias) if (f.arquivo) expect(f.textoAlternativo, `${a.slug}/${f.id}`).toBeTruthy();
   });
 
-  it('todo fato informado tem fonte com link https', () => {
+  it("todo fato tem fonte; quando há link, é https", () => {
     for (const fato of [...CIDADE.fatos, ...ATRACOES.flatMap((a) => a.fatos)]) {
-      expect(fato.fonte.url).toMatch(/^https:\/\//);
+      expect(fato.fonte.titulo).toBeTruthy();
+      if (fato.fonte.url) expect(fato.fonte.url).toMatch(/^https:\/\//);
     }
   });
 

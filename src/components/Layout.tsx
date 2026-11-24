@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, useLocation } from 'wouter';
+import { CATEGORIAS } from '../data/atracoes';
 import { SITE } from '../data/site';
 import { IconeFechar, IconeMenu } from './Icones';
 import { Marca } from './Marca';
@@ -7,14 +8,16 @@ import { Preferencias } from './Preferencias';
 
 const MENU = [
   { href: '/', rotulo: 'Início' },
-  { href: '/atracoes', rotulo: 'Pontos turísticos' },
-  { href: '/comercio', rotulo: 'Comércio local' },
+  { href: '/pontos-turisticos', rotulo: 'Pontos turísticos' },
+  { href: '/comercio-local', rotulo: 'Comércio local' },
   { href: '/sobre', rotulo: 'Sobre' },
   { href: '/contato', rotulo: 'Contato' },
 ];
 
 function ativo(local: string, href: string) {
-  return href === '/' ? local === '/' : local === href || local.startsWith(`${href}/`) || (href === '/atracoes' && local.startsWith('/categoria'));
+  if (href === '/') return local === '/';
+  if (href === '/pontos-turisticos') return local.startsWith(href) || CATEGORIAS.some((c) => local === c.caminho);
+  return local === href || local.startsWith(`${href}/`);
 }
 
 function Cabecalho() {
@@ -29,7 +32,7 @@ function Cabecalho() {
         <Link
           href={m.href}
           aria-current={ativo(local, m.href) ? 'page' : undefined}
-          className={`${classe} flex min-h-11 items-center rounded-full px-3 font-bold no-underline aria-[current=page]:bg-rio-claro aria-[current=page]:text-rio-forte text-tinta hover:text-rio`}
+          className={`${classe} flex min-h-11 items-center rounded-full px-3 font-bold no-underline hover:bg-white/10 aria-[current=page]:bg-[#e2c27e] aria-[current=page]:text-[#0e2a21]`}
         >
           {m.rotulo}
         </Link>
@@ -37,8 +40,8 @@ function Cabecalho() {
     ));
 
   return (
-    <header className="border-b border-linha bg-papel/95">
-      <div className="conteudo flex min-h-18 items-center justify-between gap-4 py-2">
+    <header className="faixa-marca border-b-2 border-[#c9a04e]/50">
+      <div className="conteudo flex min-h-20 items-center justify-between gap-4 py-3">
         <Link href="/" className="no-underline" aria-label={`${SITE.nome}, página inicial`}>
           <Marca />
         </Link>
@@ -48,7 +51,7 @@ function Cabecalho() {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="botao botao-contorno hidden px-3 text-sm sm:inline-flex"
+            className="botao botao-claro hidden px-3 text-sm sm:inline-flex"
             aria-expanded={prefs}
             aria-controls="painel-preferencias"
             onClick={() => setPrefs((p) => !p)}
@@ -57,7 +60,7 @@ function Cabecalho() {
           </button>
           <button
             type="button"
-            className="botao botao-contorno px-3 lg:hidden"
+            className="botao botao-claro px-3 lg:hidden"
             aria-expanded={aberto}
             aria-controls="menu-movel"
             onClick={() => setAberto((a) => !a)}
@@ -66,16 +69,17 @@ function Cabecalho() {
           </button>
         </div>
       </div>
-      <div id="painel-preferencias" hidden={!prefs} className="border-t border-linha bg-superficie py-3">
+      <div id="painel-preferencias" hidden={!prefs} className="border-t border-white/15 py-3">
         <div className="conteudo flex flex-wrap items-center justify-between gap-3">
           <Preferencias />
           <Link href="/acessibilidade" className="text-sm font-bold">Recursos de acessibilidade do site</Link>
         </div>
       </div>
-      <nav id="menu-movel" aria-label="Principal" hidden={!aberto} className="border-t border-linha bg-superficie py-3 lg:hidden">
+      <nav id="menu-movel" aria-label="Principal" hidden={!aberto} className="border-t border-white/15 py-3 lg:hidden">
         <ul className="conteudo flex flex-col gap-1">{links('text-lg')}</ul>
-        <div className="conteudo mt-3 border-t border-linha pt-3">
+        <div className="conteudo mt-3 space-y-3 border-t border-white/15 pt-3">
           <Preferencias />
+          <Link href="/acessibilidade" className="inline-flex min-h-11 items-center font-bold">Recursos de acessibilidade do site</Link>
         </div>
       </nav>
     </header>
@@ -84,27 +88,31 @@ function Cabecalho() {
 
 function Rodape() {
   return (
-    <footer className="rodape mt-24">
-      <div className="conteudo grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="space-y-3">
-          <p className="font-display text-2xl font-bold">O Lado de Lá Turismo</p>
+    <footer className="faixa-marca mt-24 border-t-2 border-[#c9a04e]/50">
+      <div className="conteudo grid gap-10 py-12 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="space-y-4">
+          <Marca tamanho="grande" />
           <p className="max-w-md">{SITE.lema}</p>
           <p className="max-w-md text-sm opacity-90">
-            Plataforma de turismo virtual e acessível de Alto Piquiri (PR). Não somos agência de viagens: não vendemos passeios nem pacotes.
+            Plataforma de turismo virtual, conhecimento, inclusão e acessibilidade de Alto Piquiri (PR). Não somos agência de viagens: não vendemos passeios nem pacotes.
           </p>
         </div>
         <nav aria-label="Rodapé">
-          <ul className="space-y-1">
+          <p className="ouro font-bold">Explorar</p>
+          <ul className="mt-2">
             {[...MENU, { href: '/acessibilidade', rotulo: 'Acessibilidade' }].map((m) => (
               <li key={m.href}>
-                <Link href={m.href} className="inline-flex min-h-11 items-center font-bold">{m.rotulo}</Link>
+                <Link href={m.href} className="inline-flex min-h-11 items-center">{m.rotulo}</Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="space-y-2 text-sm">
-          <p className="font-bold">Como acessar cada lugar</p>
-          <p>Cada fotografia tem duas opções: ler a descrição textual ou ouvir a audiodescrição narrada.</p>
+        <div className="space-y-3 text-sm">
+          <p className="ouro font-bold">Apoio institucional</p>
+          <p>Prefeitura Municipal de Alto Piquiri</p>
+          <p className="ouro pt-3 font-bold">Créditos</p>
+          <p>{SITE.credito}</p>
+          <p>Fotografias e textos dos pontos turísticos: Projeto EPT, Colégio Estadual Alto Piquiri.</p>
         </div>
       </div>
     </footer>
@@ -114,7 +122,7 @@ function Rodape() {
 export function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <a href="#conteudo" className="sr-only-focavel fixed left-3 top-3 z-50 rounded-lg bg-rio px-4 py-3 font-bold text-papel">
+      <a href="#conteudo" className="sr-only-focavel fixed left-3 top-3 z-50 rounded-lg bg-[#e2c27e] px-4 py-3 font-bold text-[#0e2a21]">
         Pular para o conteúdo
       </a>
       <Cabecalho />
